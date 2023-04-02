@@ -14,6 +14,29 @@ import {
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import { Link as RouterLink } from "react-router-dom";
 
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
+import YupPassword from "yup-password";
+YupPassword(yup); // extend yup
+
+const schema = yup.object().shape({
+  firstName: yup.string().required("input required"),
+  lastName: yup.string().required("input required"),
+  email: yup
+    .string()
+    .required("input required")
+    .email("please input email type"),
+  password: yup
+    .string()
+    .required("input required")
+    .password()
+    .min(8, "must have at lease 8 charectors") // disable minimum characters completely
+    .minUppercase(1, "must have at lease 1 Uppercase charector"), // add an additional rule
+});
+
+type FormData = yup.InferType<typeof schema>;
+
 function Copyright(props: any) {
   return (
     <Typography
@@ -33,14 +56,14 @@ function Copyright(props: any) {
 }
 
 export default function RegisterPage() {
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
-    });
-  };
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<FormData>({
+    resolver: yupResolver(schema),
+  });
+  const onSubmit = (data: FormData) => console.log(data);
 
   return (
     <>
@@ -61,55 +84,49 @@ export default function RegisterPage() {
               ลงทะเบียนผู้ใช้ใหม่
             </Typography>
             <Box
-              component="form"
-              noValidate
-              onSubmit={handleSubmit}
+              component={"form"}
+              onSubmit={handleSubmit(onSubmit)}
               sx={{ mt: 3 }}
             >
               <Grid container spacing={2}>
                 <Grid item xs={12} sm={6}>
                   <TextField
-                    autoComplete="given-name"
-                    name="firstName"
-                    required
+                    {...register("firstName")}
+                    error = {errors.firstName? true: false}
+                    helperText = {errors.firstName && errors.firstName.message}
                     fullWidth
-                    id="firstName"
                     label="First Name"
                     autoFocus
                   />
                 </Grid>
                 <Grid item xs={12} sm={6}>
                   <TextField
-                    required
+                    {...register("lastName")}
+                    error = {errors.lastName? true: false}
+                    helperText = {errors.lastName && errors.lastName.message}
                     fullWidth
-                    id="lastName"
                     label="Last Name"
-                    name="lastName"
-                    autoComplete="family-name"
                   />
                 </Grid>
                 <Grid item xs={12}>
                   <TextField
-                    required
+                    {...register("email")}
+                    error = {errors.email? true: false}
+                    helperText = {errors.email && errors.email.message}
                     fullWidth
-                    id="email"
                     label="Email Address"
-                    name="email"
-                    autoComplete="email"
                   />
                 </Grid>
                 <Grid item xs={12}>
                   <TextField
-                    required
+                    {...register("password")}
+                    error = {errors.password? true: false}
+                    helperText = {errors.password && errors.password.message}
                     fullWidth
-                    name="password"
                     label="Password"
                     type="password"
-                    id="password"
-                    autoComplete="new-password"
                   />
                 </Grid>
-                
               </Grid>
               <Button
                 type="submit"
@@ -121,7 +138,9 @@ export default function RegisterPage() {
               </Button>
               <Grid container justifyContent="flex-end" spacing={3}>
                 <Grid item>
-                  <RouterLink to="/" style={{ textDecoration: 'none'}} >HOME</RouterLink>
+                  <RouterLink to="/" style={{ textDecoration: "none" }}>
+                    HOME
+                  </RouterLink>
                 </Grid>
                 <Grid item>
                   <Link href="#" variant="body2">
