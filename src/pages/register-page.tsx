@@ -32,6 +32,8 @@ const schema = yup.object().shape({
     .required("input required")
     .password()
     .min(8, "must have at lease 8 charectors") // disable minimum characters completely
+    .minLowercase(0)
+    .minSymbols(0)
     .minUppercase(1, "must have at lease 1 Uppercase charector"), // add an additional rule
 });
 
@@ -62,6 +64,7 @@ export default function RegisterPage() {
     formState: { errors },
   } = useForm<FormData>({
     resolver: yupResolver(schema),
+    mode: "all"
   });
   const onSubmit = (data: FormData) => console.log(data);
 
@@ -96,7 +99,7 @@ export default function RegisterPage() {
                     helperText = {errors.firstName && errors.firstName.message}
                     fullWidth
                     label="First Name"
-                    autoFocus
+                    
                   />
                 </Grid>
                 <Grid item xs={12} sm={6}>
