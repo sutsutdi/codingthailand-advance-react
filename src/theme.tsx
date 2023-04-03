@@ -1,47 +1,31 @@
 import { createTheme } from "@mui/material/styles";
 
-
-
 // A custom theme for this app
 const theme = createTheme({
-  
   palette: {
     mode: "light",
     primary: {
       main: "#235574",
-      dark: "#17394F",
-      light: "#57B1C1"
     },
     secondary: {
-      main: "#7C4C66",
-      light: "#CD97F9",
-      dark: "#523244"
+      main: "#0072E3",
     },
     success: {
-      main: "#4F6F05",
-      light: "#03C268",
-      dark: "#02753F"
+      main: "#13BF00",
     },
     info: {
-      main: "#9E8D83",
-      light: "#BEB4AD",
-      dark: "#574B44"
+      main: "#800080",
     },
     warning: {
-      main: "#FD8E7B",
-      light: "#FEB8AB",
-      dark: "#FB5322"
+      main: "#F4D540",
     },
     error: {
       main: "#FD444E",
-      light: "#FE7E85",
-      dark: "#DE030E",
-     
     },
   },
   typography: {
     fontFamily: ["prompt", "IBM Plex Sans Thai", "poppins"].join(","),
-    
+
     subtitle1: {
       fontSize: 12,
     },
@@ -49,7 +33,7 @@ const theme = createTheme({
       fontWeight: 500,
     },
     button: {
-      fontStyle: 'bold',
+      fontStyle: "bold",
     },
   },
 });
