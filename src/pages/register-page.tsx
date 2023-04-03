@@ -11,7 +11,9 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
+
+import HowToRegRoundedIcon from "@mui/icons-material/HowToRegRounded";
+import HomeIcon from "@mui/icons-material/Home";
 import { Link as RouterLink, useNavigate } from "react-router-dom";
 
 import { useForm } from "react-hook-form";
@@ -65,8 +67,8 @@ export default function RegisterPage() {
       if (userCredential.user != null) {
         toast.success("ลงทะเบียนสำเร็จ !", {
           style: {
-            borderRadius: '50px'
-          }
+            borderRadius: "50px",
+          },
         });
         navigate("/");
       }
@@ -74,14 +76,14 @@ export default function RegisterPage() {
       if (error.code === "auth/email-already-in-use") {
         toast.error("มี email นี้ในระบบแล้ว", {
           style: {
-            borderRadius: '50px'
-          }
+            borderRadius: "50px",
+          },
         });
       } else {
         toast.error(error.message, {
           style: {
-            borderRadius: '50px'
-          }
+            borderRadius: "50px",
+          },
         });
       }
     }
@@ -118,7 +120,7 @@ export default function RegisterPage() {
             }}
           >
             <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
-              <LockOutlinedIcon />
+              <HowToRegRoundedIcon />
             </Avatar>
             <Typography component="h1" variant="h5" color="secondary">
               ลงทะเบียนผู้ใช้ใหม่
@@ -175,15 +177,17 @@ export default function RegisterPage() {
               >
                 ลงทะเบียน
               </Button>
-              <Grid container justifyContent="flex-end" spacing={3}>
-                <Grid item>
-                  <RouterLink to="/" style={{ textDecoration: "none" }}>
-                    HOME
+              <Grid container justifyContent="flex-start" spacing={1}  >
+                <Grid item   style={{paddingTop: 20}} flexGrow={1}>
+                  <RouterLink to="/" style={{ textDecoration: "none" , paddingTop: 2 , marginLeft: 5}}>
+                    <HomeIcon fontSize="large" color="secondary" style={{marginLeft: 20}}/>
                   </RouterLink>
                 </Grid>
-                <Grid item>
-                  <RouterLink to="/login" style={{ textDecoration: "none" }}>
+                <Grid item textAlign={"end"}  style={{paddingTop: 25}}>
+                  <RouterLink to="/login" style={{ textDecoration: "none" }} >
+                    <Typography variant="body1" color="warning">
                     Already have an account? Sign in
+                    </Typography>
                   </RouterLink>
                 </Grid>
               </Grid>

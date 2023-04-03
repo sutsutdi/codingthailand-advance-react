@@ -1,73 +1,129 @@
 import * as React from "react";
+import Box from "@mui/material/Box";
+import List from "@mui/material/List";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
-import ListSubheader from "@mui/material/ListSubheader";
-import DashboardIcon from "@mui/icons-material/Dashboard";
-import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
-import PeopleIcon from "@mui/icons-material/People";
-import BarChartIcon from "@mui/icons-material/BarChart";
-import LayersIcon from "@mui/icons-material/Layers";
-import AssignmentIcon from "@mui/icons-material/Assignment";
-import { Link as RouterLink } from "react-router-dom";
+import Divider from "@mui/material/Divider";
+import InboxIcon from "@mui/icons-material/Inbox";
+import DraftsIcon from "@mui/icons-material/Drafts";
+import { Link as RouterLink, useNavigate } from "react-router-dom";
 
-export const mainListItems = (
-  <React.Fragment>
-    <ListItemButton component={RouterLink} to="/">
-      <ListItemIcon>
-        <DashboardIcon />
-      </ListItemIcon>
-      <ListItemText primary="Landing Page" />
-    </ListItemButton>
-    <ListItemButton>
-      <ListItemIcon>
-        <ShoppingCartIcon />
-      </ListItemIcon>
-      <ListItemText primary="Orders" />
-    </ListItemButton>
-    <ListItemButton>
-      <ListItemIcon>
-        <PeopleIcon />
-      </ListItemIcon>
-      <ListItemText primary="Customers" />
-    </ListItemButton>
-    <ListItemButton>
-      <ListItemIcon>
-        <BarChartIcon />
-      </ListItemIcon>
-      <ListItemText primary="Reports" />
-    </ListItemButton>
-    <ListItemButton>
-      <ListItemIcon>
-        <LayersIcon />
-      </ListItemIcon>
-      <ListItemText primary="Integrations" />
-    </ListItemButton>
-  </React.Fragment>
-);
+export default function SelectedListItem() {
+  const [selectedIndex, setSelectedIndex] = React.useState(1);
+  const navigate = useNavigate();
+  const handleListItemClick = (
+    event: React.MouseEvent<HTMLDivElement, MouseEvent>,
+    index: number,
+    route: string
+  ) => {
+    setSelectedIndex(index);
+    navigate(route);
+  };
 
-export const secondaryListItems = (
-  <React.Fragment>
-    <ListSubheader component="div" inset>
-      Saved reports
-    </ListSubheader>
-    <ListItemButton>
-      <ListItemIcon>
-        <AssignmentIcon />
-      </ListItemIcon>
-      <ListItemText primary="Current month" />
-    </ListItemButton>
-    <ListItemButton>
-      <ListItemIcon>
-        <AssignmentIcon />
-      </ListItemIcon>
-      <ListItemText primary="Last quarter" />
-    </ListItemButton>
-    <ListItemButton>
-      <ListItemIcon>
-        <AssignmentIcon />
-      </ListItemIcon>
-      <ListItemText primary="Year-end sale" />
-    </ListItemButton>
-  </React.Fragment>
-);
+  return (
+    <Box sx={{ width: "100%", maxWidth: 360, bgcolor: "background.paper" }}>
+      <List component="nav" aria-label="main mailbox folders">
+        <ListItemButton
+          selected={selectedIndex === 0}
+          onClick={(event) => handleListItemClick(event, 0, "/")}
+        >
+          <ListItemIcon>
+            <InboxIcon />
+          </ListItemIcon>
+          <ListItemText primary="Home Page" />
+        </ListItemButton>
+        <ListItemButton
+          selected={selectedIndex === 1}
+          onClick={(event) => handleListItemClick(event, 1, "/register")}
+        >
+          <ListItemIcon>
+            <DraftsIcon />
+          </ListItemIcon>
+          <ListItemText primary="Register Page" />
+        </ListItemButton>
+      </List>
+      <Divider />
+      <List component="nav" aria-label="secondary mailbox folder">
+        <ListItemButton
+          selected={selectedIndex === 2}
+          onClick={(event) => handleListItemClick(event, 2, "/login")}
+        >
+          <ListItemText primary="Login Page" />
+        </ListItemButton>
+        <ListItemButton
+          selected={selectedIndex === 3}
+          onClick={(event) => handleListItemClick(event, 3, "/")}
+        >
+          <ListItemText primary="Spam" />
+        </ListItemButton>
+      </List>
+    </Box>
+  );
+}
+
+// export const mainListItems = (
+//   <React.Fragment>
+//     <ListItemButton
+//       component={RouterLink}
+//       to="/"
+//       selected={selectedIndex === 0}
+//       onClick={(event) => handleListItemClick(event, 0)}
+//     >
+//       <ListItemIcon>
+//         <DashboardIcon style={{ color: "primary" }} />
+//       </ListItemIcon>
+//       <ListItemText primary="Landing Page" />
+//     </ListItemButton>
+//     <ListItemButton>
+//       <ListItemIcon>
+//         <ShoppingCartIcon />
+//       </ListItemIcon>
+//       <ListItemText primary="Orders" />
+//     </ListItemButton>
+//     <ListItemButton>
+//       <ListItemIcon>
+//         <PeopleIcon />
+//       </ListItemIcon>
+//       <ListItemText primary="Customers" />
+//     </ListItemButton>
+//     <ListItemButton>
+//       <ListItemIcon>
+//         <BarChartIcon />
+//       </ListItemIcon>
+//       <ListItemText primary="Reports" />
+//     </ListItemButton>
+//     <ListItemButton>
+//       <ListItemIcon>
+//         <LayersIcon />
+//       </ListItemIcon>
+//       <ListItemText primary="Integrations" />
+//     </ListItemButton>
+//   </React.Fragment>
+// );
+
+// export const secondaryListItems = (
+//   <React.Fragment>
+//     <ListSubheader component="div" inset>
+//       Saved reports
+//     </ListSubheader>
+//     <ListItemButton>
+//       <ListItemIcon>
+//         <AssignmentIcon />
+//       </ListItemIcon>
+//       <ListItemText primary="Current month" />
+//     </ListItemButton>
+//     <ListItemButton>
+//       <ListItemIcon>
+//         <AssignmentIcon />
+//       </ListItemIcon>
+//       <ListItemText primary="Last quarter" />
+//     </ListItemButton>
+//     <ListItemButton>
+//       <ListItemIcon>
+//         <AssignmentIcon />
+//       </ListItemIcon>
+//       <ListItemText primary="Year-end sale" />
+//     </ListItemButton>
+//   </React.Fragment>
+// );

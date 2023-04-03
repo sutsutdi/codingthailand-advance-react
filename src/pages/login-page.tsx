@@ -123,7 +123,7 @@ export default function RegisterPage() {
               <Grid container justifyContent="flex-start" spacing={1}  >
                 <Grid item   style={{paddingTop: 20}} flexGrow={1}>
                   <RouterLink to="/" style={{ textDecoration: "none" , paddingTop: 2 }}>
-                    <HomeIcon sx={{color: 'secondary.main'}} fontSize="large" />
+                    <HomeIcon sx={{color: 'secondary.main'}} fontSize="large"  style={{marginLeft: 20}}/>
                   </RouterLink>
                 </Grid>
                 
