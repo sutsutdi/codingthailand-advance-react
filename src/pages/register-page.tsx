@@ -21,7 +21,6 @@ import YupPassword from "yup-password";
 import toast from "react-hot-toast";
 import { registerUser } from "../services/auth.service";
 
-
 YupPassword(yup); // extend yup
 
 const schema = yup.object().shape({
@@ -44,9 +43,7 @@ const schema = yup.object().shape({
 type FormData = yup.InferType<typeof schema>;
 
 export default function RegisterPage() {
-  
-  const navigate = useNavigate()
-
+  const navigate = useNavigate();
 
   const {
     register,
@@ -54,24 +51,41 @@ export default function RegisterPage() {
     formState: { errors },
   } = useForm<FormData>({
     resolver: yupResolver(schema),
-    mode: "all"
+    mode: "all",
   });
 
   const onSubmit = async (data: FormData) => {
     try {
-      const userCredential = await registerUser(data.firstName , data.lastName , data.email , data.password! )
+      const userCredential = await registerUser(
+        data.firstName,
+        data.lastName,
+        data.email,
+        data.password!
+      );
       if (userCredential.user != null) {
-        toast.success('ลงทะเบียนสำเร็จ !')
-        navigate('/')
+        toast.success("ลงทะเบียนสำเร็จ !", {
+          style: {
+            borderRadius: '50px'
+          }
+        });
+        navigate("/");
       }
     } catch (error: any) {
       if (error.code === "auth/email-already-in-use") {
-        toast.error("มี email นี้ในระบบแล้ว")
+        toast.error("มี email นี้ในระบบแล้ว", {
+          style: {
+            borderRadius: '50px'
+          }
+        });
       } else {
-        toast.error(error.message)
+        toast.error(error.message, {
+          style: {
+            borderRadius: '50px'
+          }
+        });
       }
     }
-  }
+  };
 
   function Copyright(props: any) {
     return (
@@ -82,8 +96,8 @@ export default function RegisterPage() {
         {...props}
       >
         {"Copyright © "}
-        <Link color="inherit" href="https://mui.com/">
-          Your Website
+        <Link color="inherit" href="https://warin.go.th/">
+          Warinchamrab Hospital
         </Link>{" "}
         {new Date().getFullYear()}
         {"."}
@@ -118,18 +132,17 @@ export default function RegisterPage() {
                 <Grid item xs={12} sm={6}>
                   <TextField
                     {...register("firstName")}
-                    error = {errors.firstName? true: false}
-                    helperText = {errors.firstName && errors.firstName.message}
+                    error={errors.firstName ? true : false}
+                    helperText={errors.firstName && errors.firstName.message}
                     fullWidth
                     label="First Name"
-                    
                   />
                 </Grid>
                 <Grid item xs={12} sm={6}>
                   <TextField
                     {...register("lastName")}
-                    error = {errors.lastName? true: false}
-                    helperText = {errors.lastName && errors.lastName.message}
+                    error={errors.lastName ? true : false}
+                    helperText={errors.lastName && errors.lastName.message}
                     fullWidth
                     label="Last Name"
                   />
@@ -137,8 +150,8 @@ export default function RegisterPage() {
                 <Grid item xs={12}>
                   <TextField
                     {...register("email")}
-                    error = {errors.email? true: false}
-                    helperText = {errors.email && errors.email.message}
+                    error={errors.email ? true : false}
+                    helperText={errors.email && errors.email.message}
                     fullWidth
                     label="Email Address"
                   />
@@ -146,8 +159,8 @@ export default function RegisterPage() {
                 <Grid item xs={12}>
                   <TextField
                     {...register("password")}
-                    error = {errors.password? true: false}
-                    helperText = {errors.password && errors.password.message}
+                    error={errors.password ? true : false}
+                    helperText={errors.password && errors.password.message}
                     fullWidth
                     label="Password"
                     type="password"
@@ -169,9 +182,9 @@ export default function RegisterPage() {
                   </RouterLink>
                 </Grid>
                 <Grid item>
-                  <Link href="#" variant="body2">
+                  <RouterLink to="/login" style={{ textDecoration: "none" }}>
                     Already have an account? Sign in
-                  </Link>
+                  </RouterLink>
                 </Grid>
               </Grid>
             </Box>

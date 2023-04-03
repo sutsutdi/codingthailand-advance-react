@@ -17,16 +17,14 @@ import {
 import CameraIcon from "@mui/icons-material/PhotoCamera";
 import { Link as RouterLink } from "react-router-dom";
 
-import "@fontsource/prompt";
-
 
 
 function Copyright() {
   return (
-    <Typography variant="body2" color="text.secondary" align="center" >
+    <Typography variant="body2" color="text.secondary" align="center">
       {"Copyright © "}
       <Link color="inherit" href="https://mui.com/">
-        Your Website
+        Warinchamrab Hospital
       </Link>{" "}
       {new Date().getFullYear()}
       {"."}
@@ -43,7 +41,7 @@ export default function HomePage() {
         <Toolbar>
           <CameraIcon sx={{ mr: 2 }} />
           <Typography variant="h6" color="inherit" noWrap>
-            ระบบลา ออนไลน์
+            I-Claim HICM
           </Typography>
         </Toolbar>
       </AppBar>
@@ -60,12 +58,21 @@ export default function HomePage() {
           <Container maxWidth="sm">
             <Typography
               component="h1"
-              variant="h3"
+              variant="h4"
               align="center"
               color="text.info"
               gutterBottom
             >
-              ระบบ ลาออนไลน์
+              ระบบ การเรียกเก็บประกันชีวิต
+            </Typography>
+            <Typography
+              component="h1"
+              variant="h5"
+              align="center"
+              color="text.info"
+              gutterBottom
+            >
+              Warinchamrab Hospital
             </Typography>
             <Typography
               variant="body1"
@@ -83,27 +90,24 @@ export default function HomePage() {
               spacing={2}
               justifyContent="center"
             >
-              <Button variant="contained" component={RouterLink} to='/register'>เข้าระบบ</Button>
-              <Button variant="outlined" color="error" component={RouterLink} to='/register'>ลงทะเบียน</Button>
+              <Button variant="contained" component={RouterLink} to="/login">
+                เข้าระบบ
+              </Button>
+              <Button
+                variant="outlined"
+                color="error"
+                component={RouterLink}
+                to="/register"
+              >
+                ลงทะเบียน
+              </Button>
             </Stack>
           </Container>
         </Box>
-      
       </main>
 
       {/* Footer */}
       <Box sx={{ bgcolor: "background.paper", p: 6 }} component="footer">
-        <Typography variant="h6" align="center" gutterBottom>
-          Footer
-        </Typography>
-        <Typography
-          variant="subtitle1"
-          align="center"
-          color="text.secondary"
-          component="p"
-        >
-          Something here to give the footer a purpose!
-        </Typography>
         <Copyright />
       </Box>
       {/* End footer */}
