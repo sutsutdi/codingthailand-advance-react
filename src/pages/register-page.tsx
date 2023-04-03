@@ -12,12 +12,16 @@ import {
   Typography,
 } from "@mui/material";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
-import { Link as RouterLink } from "react-router-dom";
+import { Link as RouterLink, useNavigate } from "react-router-dom";
 
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import YupPassword from "yup-password";
+import toast from "react-hot-toast";
+import { registerUser } from "../services/auth.service";
+
+
 YupPassword(yup); // extend yup
 
 const schema = yup.object().shape({
@@ -39,25 +43,11 @@ const schema = yup.object().shape({
 
 type FormData = yup.InferType<typeof schema>;
 
-function Copyright(props: any) {
-  return (
-    <Typography
-      variant="body2"
-      color="text.secondary"
-      align="center"
-      {...props}
-    >
-      {"Copyright © "}
-      <Link color="inherit" href="https://mui.com/">
-        Your Website
-      </Link>{" "}
-      {new Date().getFullYear()}
-      {"."}
-    </Typography>
-  );
-}
-
 export default function RegisterPage() {
+  
+  const navigate = useNavigate()
+
+
   const {
     register,
     handleSubmit,
@@ -66,7 +56,40 @@ export default function RegisterPage() {
     resolver: yupResolver(schema),
     mode: "all"
   });
-  const onSubmit = (data: FormData) => console.log(data);
+
+  const onSubmit = async (data: FormData) => {
+    try {
+      const userCredential = await registerUser(data.firstName , data.lastName , data.email , data.password! )
+      if (userCredential.user != null) {
+        toast.success('ลงทะเบียนสำเร็จ !')
+        navigate('/')
+      }
+    } catch (error: any) {
+      if (error.code === "auth/email-already-in-use") {
+        toast.error("มี email นี้ในระบบแล้ว")
+      } else {
+        toast.error(error.message)
+      }
+    }
+  }
+
+  function Copyright(props: any) {
+    return (
+      <Typography
+        variant="body2"
+        color="text.secondary"
+        align="center"
+        {...props}
+      >
+        {"Copyright © "}
+        <Link color="inherit" href="https://mui.com/">
+          Your Website
+        </Link>{" "}
+        {new Date().getFullYear()}
+        {"."}
+      </Typography>
+    );
+  }
 
   return (
     <>

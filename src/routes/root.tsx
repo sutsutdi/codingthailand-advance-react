@@ -5,8 +5,8 @@ import RegisterPage from "../pages/register-page";
 
 const router = createBrowserRouter([
   { path: "/", element: <HomePage /> },
-
-  { path: "/register", element: <RegisterPage /> },
+  { path: "/register", element: <RegisterPage /> },  
+  { path: "/login", element: <RegisterPage /> },
 ]);
 
 export default router;

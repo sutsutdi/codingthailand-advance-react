@@ -18,7 +18,7 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <ThemeProvider theme={theme}>
   <CssBaseline />
      <RouterProvider router={router}/>
-     <Toaster position='bottom-right' />
+     <Toaster position='top-right' />
   </ThemeProvider>
   // </React.StrictMode>,
 )
