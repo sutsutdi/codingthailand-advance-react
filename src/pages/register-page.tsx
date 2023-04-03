@@ -1,4 +1,5 @@
 import {
+  Alert,
   Avatar,
   Box,
   Button,
@@ -8,6 +9,7 @@ import {
   FormControlLabel,
   Grid,
   Link,
+  Snackbar,
   TextField,
   Typography,
 } from "@mui/material";
@@ -74,6 +76,7 @@ export default function RegisterPage() {
       }
     } catch (error: any) {
       if (error.code === "auth/email-already-in-use") {
+        
         toast.error("มี email นี้ในระบบแล้ว", {
           style: {
             borderRadius: "50px",

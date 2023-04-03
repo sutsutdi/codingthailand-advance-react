@@ -26,7 +26,6 @@ import { Outlet } from "react-router-dom";
 import { ListItemButton, ListItemIcon, ListItemText } from "@mui/material";
 import { Link as RouterLink } from "react-router-dom";
 
-
 function Copyright(props: any) {
   return (
     <Typography
@@ -153,6 +152,11 @@ function DashboardContent() {
             alignItems: "center",
             justifyContent: "flex-end",
             px: [1],
+
+            bgColor: (theme) =>
+              theme.palette.mode === "light"
+                ? theme.palette.grey[100]
+                : theme.palette.grey[900],
           }}
         >
           <IconButton onClick={toggleDrawer}>
@@ -160,26 +164,35 @@ function DashboardContent() {
           </IconButton>
         </Toolbar>
         <Divider />
-        <List component="nav" color="primary">
-          <SelectedListItem/>
+        <List
+          component="nav"
+          sx={{
+            backgroundColor: (theme) =>
+              theme.palette.mode === "light"
+                ? theme.palette.grey[100]
+                : theme.palette.grey[900],
+          }}
+        >
+          <SelectedListItem />
           <Divider sx={{ my: 1 }} />
-        
         </List>
       </Drawer>
-      <Box
-        component="main"
-        sx={{
-          backgroundColor: (theme) =>
-            theme.palette.mode === "light"
-              ? theme.palette.grey[100]
-              : theme.palette.grey[900],
-          flexGrow: 1,
-          height: "100vh",
-          overflow: "auto",
-        }}
-      >
+      <Box component="main">
         <Toolbar />
-        <Container maxWidth={false} sx={{ mt: 4, mb: 4 }}>
+        <Container
+          maxWidth={false}
+          sx={{
+            bgColor: (theme) =>
+              theme.palette.mode === "light"
+                ? theme.palette.grey[100]
+                : theme.palette.grey[900],
+            flexGrow: 1,
+            height: "100vh",
+            overflow: "auto",
+            mt: 4,
+            mb: 4,
+          }}
+        >
           <Outlet />
         </Container>
       </Box>

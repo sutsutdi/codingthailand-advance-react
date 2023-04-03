@@ -10,7 +10,7 @@ import DraftsIcon from "@mui/icons-material/Drafts";
 import { Link as RouterLink, useNavigate } from "react-router-dom";
 
 export default function SelectedListItem() {
-  const [selectedIndex, setSelectedIndex] = React.useState(1);
+  const [selectedIndex, setSelectedIndex] = React.useState(99);
   const navigate = useNavigate();
   const handleListItemClick = (
     event: React.MouseEvent<HTMLDivElement, MouseEvent>,
@@ -22,11 +22,21 @@ export default function SelectedListItem() {
   };
 
   return (
-    <Box sx={{ width: "100%", maxWidth: 360, bgcolor: "background.paper" }}>
+    <Box
+      sx={{
+        width: "100%",
+        maxWidth: 360,
+        bgColor: (theme) =>
+          theme.palette.mode === "light"
+            ? theme.palette.grey[100]
+            : theme.palette.grey[900],
+      }}
+    >
       <List component="nav" aria-label="main mailbox folders">
         <ListItemButton
           selected={selectedIndex === 0}
           onClick={(event) => handleListItemClick(event, 0, "/")}
+          
         >
           <ListItemIcon>
             <InboxIcon />
@@ -61,4 +71,3 @@ export default function SelectedListItem() {
     </Box>
   );
 }
-

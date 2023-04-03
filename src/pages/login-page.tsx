@@ -99,6 +99,10 @@ export default function RegisterPage() {
                     helperText={errors.email && errors.email.message}
                     fullWidth
                     label="Email Address"
+                    sx={{bgColor: (theme) =>
+                      theme.palette.mode === "light"
+                        ? theme.palette.grey[100]
+                        : theme.palette.grey[900],}}
                   />
                 </Grid>
                 <Grid item xs={12}>
@@ -109,6 +113,10 @@ export default function RegisterPage() {
                     fullWidth
                     label="Password"
                     type="password"
+                    sx={{bgColor: (theme) =>
+                      theme.palette.mode === "light"
+                        ? theme.palette.grey[100]
+                        : theme.palette.grey[900],}}
                   />
                 </Grid>
               </Grid>

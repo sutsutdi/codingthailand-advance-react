@@ -17,8 +17,6 @@ import {
 import CameraIcon from "@mui/icons-material/PhotoCamera";
 import { Link as RouterLink } from "react-router-dom";
 
-
-
 function Copyright() {
   return (
     <Typography variant="body2" color="text.secondary" align="center">
@@ -50,12 +48,16 @@ export default function HomePage() {
         {/* Hero unit */}
         <Box
           sx={{
-            bgcolor: "background.paper",
+            bgColor: (theme) =>
+              theme.palette.mode === "light"
+                ? theme.palette.grey[100]
+                : theme.palette.grey[900],
+
             pt: 8,
             pb: 6,
           }}
         >
-          <Container maxWidth="sm">
+          <Container maxWidth="sm" sx={{height: '100vh'}}>
             <Typography
               component="h1"
               variant="h4"
