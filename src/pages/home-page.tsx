@@ -63,7 +63,7 @@ export default function HomePage() {
               color="text.info"
               gutterBottom
             >
-              ระบบ การเรียกเก็บประกันชีวิต
+              ระบบ การเรียกเก็บค่าบริการประกันชีวิต
             </Typography>
             <Typography
               component="h1"
@@ -100,6 +100,14 @@ export default function HomePage() {
                 to="/register"
               >
                 ลงทะเบียน
+              </Button>
+              <Button
+                variant="outlined"
+                color="success"
+                component={RouterLink}
+                to="/dashboard"
+              >
+                Dashboard
               </Button>
             </Stack>
           </Container>
