@@ -11,7 +11,7 @@ import theme from './theme';
 
 import router from './routes/root';
 
-
+import "@fontsource/prompt";
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   // <React.StrictMode>
