@@ -11,18 +11,20 @@ import {
 } from "@mui/material";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import HomeIcon from "@mui/icons-material/Home";
-import { Link as RouterLink } from "react-router-dom";
+import { Link as RouterLink, useNavigate } from "react-router-dom";
 
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import YupPassword from "yup-password";
+import { login } from "../services/auth.service";
+import toast from "react-hot-toast";
+
 
 YupPassword(yup); // extend yup
 
 const schema = yup.object().shape({
-  firstName: yup.string().required("input required"),
-  lastName: yup.string().required("input required"),
+  
   email: yup
     .string()
     .required("input required")
@@ -57,7 +59,10 @@ function Copyright(props: any) {
   );
 }
 
-export default function RegisterPage() {
+export default function LoginPage() {
+
+  const navigate = useNavigate();
+
   const {
     register,
     handleSubmit,
@@ -66,7 +71,45 @@ export default function RegisterPage() {
     resolver: yupResolver(schema),
     mode: "all",
   });
-  const onSubmit = (data: FormData) => console.log(data);
+
+  
+  const onSubmit = async (data: FormData) => {
+    try {
+      const userCredential = await login(
+        data.email,
+        data.password!
+      );
+      if (userCredential.user != null) {
+        toast.success("เข้าระบบสำเร็จ !", {
+          style: {
+            borderRadius: "50px",
+          },
+        });
+        navigate("/dashboard");
+      }
+    } catch (error: any) {
+      if (error.code === "auth/wrong-password") {
+        
+        toast.error("error password", {
+          style: {
+            borderRadius: "50px",
+          },
+        });
+      } else if (error.code === "auth/user-not-found") {
+        toast.error("user not found !", {
+          style: {
+            borderRadius: "50px",
+          },
+        });
+      } else {
+        toast.error(error.message, {
+          style: {
+            borderRadius: "50px",
+          },
+        });
+      }
+    }
+  };
 
   return (
     <>
