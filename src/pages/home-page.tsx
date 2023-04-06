@@ -107,7 +107,8 @@ export default function HomePage() {
                 variant="outlined"
                 color="success"
                 component={RouterLink}
-                to="/dashboard"
+                // to="/dashboard"
+                to="/layout"
               >
                 Dashboard
               </Button>
