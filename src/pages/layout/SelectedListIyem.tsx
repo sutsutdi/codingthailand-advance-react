@@ -21,8 +21,8 @@ export default function SelectedListItem() {
 
   const menuItem: Array<MenuItem> = [
     { label: "หน้าหลัก", icon: <Dashboard />, href: "/" },
-    { label: "ยื่นใบลา", icon: <People />, href: "#" },
-    { label: "จัดการการลา", icon: <BarChart />, href: "#" },
+    { label: "ยื่นใบลา", icon: <People />, href: "/layout/leave" },
+    { label: "จัดการการลา", icon: <BarChart />, href: "/layout/manageleave" },
   ];
 
   return (
