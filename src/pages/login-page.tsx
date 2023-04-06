@@ -85,7 +85,7 @@ export default function LoginPage() {
             borderRadius: "50px",
           },
         });
-        navigate("/dashboard");
+        navigate("/layout");
       }
     } catch (error: any) {
       if (error.code === "auth/wrong-password") {

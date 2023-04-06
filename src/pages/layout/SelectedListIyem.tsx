@@ -5,18 +5,25 @@ import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import Divider from "@mui/material/Divider";
-import InboxIcon from "@mui/icons-material/MoveToInbox";
-import MailIcon from "@mui/icons-material/Mail";
-import { Link as RouterLink, useNavigate } from "react-router-dom";
+import { Dashboard  , People , BarChart } from "@mui/icons-material";
+
+import { useNavigate } from "react-router-dom";
 import { ListItem } from "@mui/material";
 
+type MenuItem = {
+  label: string;
+  icon: any;
+  href: string;
+};
+
 export default function SelectedListItem() {
-  const [selectedIndex, setSelectedIndex] = React.useState(99);
   const navigate = useNavigate();
-  
 
-
-  
+  const menuItem: Array<MenuItem> = [
+    { label: "หน้าหลัก", icon: <Dashboard />, href: "/" },
+    { label: "ยื่นใบลา", icon: <People />, href: "#" },
+    { label: "จัดการการลา", icon: <BarChart />, href: "#" },
+  ];
 
   return (
     <Box
@@ -29,31 +36,23 @@ export default function SelectedListItem() {
             : theme.palette.grey[900],
       }}
     >
-           <List>
-        {["Inbox", "Starred", "Send email", "Drafts"].map((text, index) => (
-          <ListItem key={text} disablePadding>
-            <ListItemButton>
+      <List>
+        { menuItem.map((item) =>{ return (
+            <ListItem disablePadding>
+            <ListItemButton onClick={() => navigate(item.href)}>
               <ListItemIcon>
-                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+                {item.icon}
               </ListItemIcon>
-              <ListItemText primary={text} />
+              <ListItemText primary= {item.label} />
             </ListItemButton>
           </ListItem>
-        ))}
+          )}
+         
+        )}
+       
+        
       </List>
       <Divider />
-      <List>
-        {["All mail", "Trash", "Spam"].map((text, index) => (
-          <ListItem key={text} disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-              </ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItemButton>
-          </ListItem>
-        ))}
-      </List>
     </Box>
   );
 }

@@ -45,7 +45,7 @@ export default function Heaader(props: any) {
           <MenuIcon />
         </IconButton>
         <Typography variant="h6" noWrap component="div" sx={{ flexGrow: 1 }}>
-          Persistent drawer
+          I-Claim HICM
         </Typography>
         <AccountMenu />
       </Toolbar>
