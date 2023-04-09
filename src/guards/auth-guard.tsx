@@ -4,25 +4,28 @@ import { firebaseApp } from "../configs/firebase";
 import { Navigate, useNavigate } from "react-router-dom";
 import Layout from "../pages/layout/Layout";
 import { Unsubscribe } from "@mui/icons-material";
+import { useAppSelector } from "../reux-toolkit/hooks";
+import { selectAuthState } from "../reux-toolkit/auth/auth-slice";
 
 
 const AuthGuard = () => {
   const navigate = useNavigate()  
   const auth = getAuth(firebaseApp);
-  const [account,setAccount] = useState<any>(null)
+//   const [account,setAccount] = useState<any>(null)
 
-  useEffect(()=>{
-    const unSubscribed =  onAuthStateChanged(auth, (user)=>{
-        if (user) {
-           setAccount(user) // login
+  const {account} = useAppSelector(selectAuthState)
+//   useEffect(()=>{
+//     const unSubscribed =  onAuthStateChanged(auth, (user)=>{
+//         if (user) {
+//            setAccount(user) // login
        
-        } else {
-           setAccount(null) // logout
+//         } else {
+//            setAccount(null) // logout
         
-        }
-     })
-     return ()=> unSubscribed()
-  },[])
+//         }
+//      })
+//      return ()=> unSubscribed()
+//   },[])
 
   if (account === null) {
     return (

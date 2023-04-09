@@ -1,9 +1,19 @@
 import { Typography } from "@mui/material";
+import { useAppSelector } from "../../reux-toolkit/hooks";
+import { selectAuthState } from "../../reux-toolkit/auth/auth-slice";
+
+
 
 const Content = () => {
+
+  const {account} = useAppSelector(selectAuthState)
+
   return (
     
     <>
+      <Typography component={'h2'} >
+        ยินดีต้อนรับ   {account?.firstName}  {account?.lastName}
+      </Typography>  
       <Typography paragraph>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
         tempor incididunt ut labore et dolore magna aliqua. Rhoncus dolor purus

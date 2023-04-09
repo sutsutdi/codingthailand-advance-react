@@ -6,6 +6,8 @@ import Typography from "@mui/material/Typography";
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 import AccountMenu from "./AccountMenu";
+import { useAppSelector } from "../../reux-toolkit/hooks";
+import { selectAuthState } from "../../reux-toolkit/auth/auth-slice";
 
 const drawerWidth = 240;
 
@@ -32,6 +34,8 @@ const AppBar = styled(MuiAppBar, {
 
 export default function Heaader(props: any) {
   const { open , handleDrawerOpen} = props
+  const {account} = useAppSelector(selectAuthState)
+
   return (
     <AppBar position="fixed" open={open}>
       <Toolbar>
@@ -47,7 +51,11 @@ export default function Heaader(props: any) {
         <Typography variant="h6" noWrap component="div" sx={{ flexGrow: 1 }}>
           I-Claim HICM
         </Typography>
+        <Typography variant="body1" noWrap component="p" sx={{ flexGrow: 1 }}>
+          Welcome {account.firstName}  {account.lastName}
+        </Typography>
         <AccountMenu />
+
       </Toolbar>
     </AppBar>
   );
